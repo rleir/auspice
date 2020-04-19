@@ -629,7 +629,7 @@ class Map extends React.Component {
   fitMapBoundsToData(demeData, demeIndices) {
     const SWNE = this.getGeoRange(demeData, demeIndices);
     // window.L available because leaflet() was called in componentWillMount
-    this.state.currentBounds = window.L.latLngBounds(SWNE[0], SWNE[1]);
+    this.setState({currentBounds: window.L.latLngBounds(SWNE[0], SWNE[1])});
     const maxZoom = this.getMaxZoomForFittingMapToData();
     this.state.map.fitBounds(window.L.latLngBounds(SWNE[0], SWNE[1]), {maxZoom});
   }

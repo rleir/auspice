@@ -122,6 +122,26 @@ export const drawTips = function drawTips() {
 };
 
 /**
+ * clear the callbacks for tip circles
+ * @return {null}
+ */
+export const clearTips = function clearTips() {
+  timerStart("clearTips");
+  const params = this.params;
+
+  this.groups.tips
+    .selectAll(".tip")
+    .data(this.nodes.filter((d) => d.terminal))
+    .selectAll("circle") // make this all one selectall
+    .attr("r", "50")
+    .on("mouseover", null)
+        //.on("mouseout", this.callbacks.onTipLeave)
+        //.on("click", this.callbacks.onTipClick)
+
+  timerEnd("clearTips");
+};
+
+/**
  * given a tree node, decide whether the branch should be rendered
  * This enforces the "hidden" property set on `node.node_attrs.hidden`
  * in the dataset JSON

@@ -64,6 +64,8 @@ PhyloTree.prototype.drawVaccines = renderers.drawVaccines;
 PhyloTree.prototype.drawRegression = renderers.drawRegression;
 PhyloTree.prototype.removeRegression = renderers.removeRegression;
 PhyloTree.prototype.updateColorBy = renderers.updateColorBy;
+/* C L E A N U P    F U N C T I O N S */
+PhyloTree.prototype.clearTips = renderers.clearTips;
 
 /* C A L C U L A T E    G E O M E T R I E S  E T C   ( M O D I F I E S    N O D E S ,    N O T    S V G ) */
 PhyloTree.prototype.setDistance = layouts.setDistance;

@@ -370,4 +370,5 @@ export const change = function change({
   }
   this.timeLastRenderRequested = Date.now();
   timerEnd("phylotree.change()");
+  clearTips();
 };

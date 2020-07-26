@@ -179,6 +179,9 @@ class Tree extends React.Component {
       </Card>
     );
   }
+  componentWillUnmount() {
+    this.state.tree.clearTips();
+  }
 }
 
 const WithTranslation = withTranslation()(Tree);

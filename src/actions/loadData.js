@@ -8,15 +8,18 @@ import { fetchJSON, fetchWithErrorHandling } from "../util/serverInteraction";
 import { warningNotification, errorNotification } from "./notifications";
 import { hasExtension, getExtension } from "../util/extensions";
 import { parseMarkdownNarrativeFile } from "../util/parseNarrative";
+import { NoContentError } from "../util/exceptions";
 import { parseMarkdown } from "../util/parseMarkdown";
-
+import { updateColorByWithRootSequenceData } from "../actions/colors";
 
 /**
  * Sends a GET request to the `/charon` web API endpoint requesting data.
- * Throws an `Error` if the response is not successful or is not a redirect.
  *
- * Returns a `Promise` containing the `Response` object. JSON data must be
- * accessed from the `Response` object using the `.json()` method.
+ * If the request is successful then the `Response` object is returned.
+ * Note that a redirected response can still be successful.
+ *
+ * Unsuccessful responses result in an `Error` being thrown.
+ * If the response is 204 then a `NoContentError` is thrown.
  *
  * @param {String} prefix: the main dataset information pertaining to the query,
  *  e.g. 'flu'
@@ -175,7 +178,8 @@ const fetchDataAndDispatch = async (dispatch, url, query, narrativeBlocks) => {
     });
 
   } catch (err) {
-    if (err.message === "No Content") { // status code 204
+    /* No Content (204) errors are special cases where there is no dataset, but the URL is valid */
+    if (err instanceof NoContentError) {
       /* TODO: add more helper functions for moving between pages in auspice */
       return dispatch({
         type: types.PAGE_CHANGE,
@@ -208,6 +212,18 @@ const fetchDataAndDispatch = async (dispatch, url, query, narrativeBlocks) => {
     console.error("Failed to fetch available datasets", err.message);
     dispatch(warningNotification({message: "Failed to fetch available datasets"}));
   }
+
+  /* Attempt to fetch the root-sequence JSON, which may or may not exist */
+  try {
+    const rootSequenceData = await getDataset(mainDatasetUrl, {type: "root-sequence"})
+      .then((res) => res.json());
+    dispatch({type: types.SET_ROOT_SEQUENCE, data: rootSequenceData});
+    dispatch(updateColorByWithRootSequenceData());
+  } catch (err) {
+    // We don't log anything as it's not unexpected to be missing the root-sequence JSON
+    // console.log("Failed to get the root-sequence JSON", err.message);
+  }
+
   return undefined;
 };
 

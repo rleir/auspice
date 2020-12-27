@@ -2,6 +2,43 @@
 title: Changelog
 ---
 
+## version 2.20.1 - 2020/11/19
+
+
+* Small bugfixes and performance improvements relatingo to the features introduced in 2.20.0
+
+## version 2.20.0 - 2020/11/18
+
+See [PR 1200](https://github.com/nextstrain/auspice/pull/1200).
+* Add on-hover tooltips to the sidebar to better convey the functionality available.
+See [PR 1200](https://github.com/nextstrain/auspice/pull/1200).
+* Improve how we space temporal grid lines (phylogeny & frequencies panels).
+See [PR 1229](https://github.com/nextstrain/auspice/pull/1229).
+* Fix a bug in how we detected HTTP status codes.
+See [PR 1226](https://github.com/nextstrain/auspice/pull/1226).
+* Auspice documentation is now switched to the Read The Docs platform, and available at https://docs.nextstrain.org/projects/auspice.
+Redirects have been added for the old GitHub pages site, and can be found in the [redirect-documentation](https://github.com/nextstrain/auspice/tree/redirect-documentation) branch.
+See [PR 1220](https://github.com/nextstrain/auspice/pull/1220).
+
+
+## version 2.19.0 - 2020/10/07
+* The auspice client now makes a request for the root-sequence JSON, which allows colouring of the tree by genotypes where there are no mutations.
+See [PR 1197](https://github.com/nextstrain/auspice/pull/1197).
+* polyfill `Promise` to avoid crashes in old browsers.
+See [PR 1217](https://github.com/nextstrain/auspice/pull/1217).
+
+
+## version 2.18.4 - 2020/09/28
+* (Bugfix) Update dependencies to restore behavior of the leaflet-scroll overlay.
+See [nextstrain.org PR #223](https://github.com/nextstrain/nextstrain.org/issues/223) for context, implemented in [PR 1214](https://github.com/nextstrain/auspice/pull/1214)
+
+## version 2.18.3 - 2020/09/22
+This version reverts the change to URL parsing introduced in 2.18.2 which broke Auspice on Safari (and perhaps other browsers).
+
+## version 2.18.2 - 2020/09/19
+* (Bugfix) Ensure generated SVG ids are escaped correctly. See [PR 1209](https://github.com/nextstrain/auspice/pull/1209).
+* Improve parsing of auspice URLs with colon characters in the pathname. See [PR 1210](https://github.com/nextstrain/auspice/pull/1210).
+
 ## version 2.18.1 - 2020/08/07
 * Add between-paragraph padding for text rendering in (non-mobile) narratives. 
 

@@ -4,6 +4,7 @@
 import "whatwg-fetch"; // eslint-disable-line
 import "core-js";
 import "regenerator-runtime";
+import "css.escape";
 /* L I B R A R I E S */
 import "react-hot-loader";
 import React from "react";
@@ -22,7 +23,6 @@ import "./css/browserCompatability.css";
 import "./css/bootstrapCustomized.css";
 import "./css/static.css";
 import "./css/notifications.css";
-import "./css/boxed.css";
 import "./css/select.css";
 
 /* FONTS */

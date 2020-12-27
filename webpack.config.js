@@ -109,7 +109,7 @@ const generateConfig = ({extensionPath, devMode=false, customOutputPath, analyze
     plugins.push(new BundleAnalyzerPlugin());
   }
 
-  const entry = devMode ? ["webpack-hot-middleware/client", "./src/indexAsync"] : ["./src/indexAsync"];
+  const entry = devMode ? ["webpack-hot-middleware/client", "./src/indexAsync"] : ["core-js/es/promise", "./src/indexAsync"];
 
   /* Where do we want the output to be saved?
    * For development we use the (virtual) "devel" directory
@@ -157,9 +157,9 @@ const generateConfig = ({extensionPath, devMode=false, customOutputPath, analyze
   const bigVendors = [
     "d3-.*", // d3 is imported selectively, new usages may change the bundle
     "lodash", // lodash is imported selectively using the lodash plugin, new usages may change the bundle
-    "awesomplete",
     "react-transition-group",
     "react-icons",
+    "react-tooltip",
     "create-react-class",
     "mousetrap",
     "react-input-autosize",
